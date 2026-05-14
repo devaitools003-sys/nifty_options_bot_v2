@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ⬡ Nifty Options Bot v2
 
 A modular, production-ready algorithmic trading bot for **Nifty 50 index options** on Indian markets.  
@@ -424,3 +425,5 @@ Always write: `html.Div([children...], style={...})`
 ---
 
 *Built with Python · Plotly Dash · ICICIdirect Breeze API*
+=======
+# nifty_options_bot_v2

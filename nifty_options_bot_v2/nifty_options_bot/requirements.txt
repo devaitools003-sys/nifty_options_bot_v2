@@ -1,0 +1,25 @@
+# Nifty Options Bot — Requirements
+# pip install -r requirements.txt
+
+# Core
+PyYAML>=6.0
+python-dateutil>=2.8
+
+# Dashboard
+dash>=2.14.0
+plotly>=5.18.0
+
+# HTTP
+requests>=2.31.0
+urllib3>=2.0
+
+# Analytics
+numpy>=1.24.0
+scipy>=1.11.0
+
+# ICICIdirect Breeze API  ← NEW
+breeze-connect>=1.0.47
+
+# Utilities
+python-dotenv>=1.0.0
+pandas>=2.0.0

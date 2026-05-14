@@ -1,0 +1,82 @@
+# ============================================================
+# Nifty Options Bot — Configuration
+# Live Market Data (ICICIdirect Breeze) + Paper Trading
+# ============================================================
+
+# ── Broker ───────────────────────────────────────────────────
+broker:
+  name: icicidirect
+  paper_trading: true                 # ALWAYS true — paper orders only
+
+  # Get these from https://api.icicidirect.com/
+  # Run tools/get_session_token.py each morning to refresh session_token
+  api_key: "*5F9i99=81441156107985wy402XT242"
+  api_secret: "2243i58c&47x2d7024kg1107V7+57P72"
+  session_token: "55610910"
+
+  slippage_pct: 0.1
+
+# ── Instrument ───────────────────────────────────────────────
+instrument:
+  index: NIFTY
+  exchange: NSE
+  segment: NFO
+  lot_size: 50
+  expiry: nearest
+  strike_step: 50
+
+# ── Strategy ─────────────────────────────────────────────────
+strategy:
+  name: atm_straddle
+  entry_time: "09:20"
+  exit_time: "15:10"
+  lots: 1
+  atm_offset: 0
+  strangle_width: 2
+  iron_condor:
+    short_offset: 1
+    long_offset: 3
+
+# ── Capital & Margin ────────────────────────────────────────
+capital:
+  total_capital: 150000             # ₹1,50,000 total account size
+  max_margin_limit: 100000          # ₹1,00,000 hard margin ceiling
+  safety_buffer: 50000              # ₹50,000 always kept free
+  auto_select_lots: true            # bot decides lots based on margin
+  auto_select_strategy: true        # bot picks safest fitting strategy
+  preferred_strategy: atm_straddle  # try this first, fall back if needed
+  margin_breach_action: square_off_worst_leg  # action on breach
+
+# ── Risk ─────────────────────────────────────────────────────
+risk:
+  max_loss_per_day: 3000
+  target_profit_per_day: 5000
+  position_stop_loss: 2000
+  position_target: 1500
+  max_trades_per_day: 1
+  max_open_positions: 4             # up to 4 legs (iron condor)
+  trailing_sl: false
+  margin_warning_pct: 80            # warn on dashboard at 80% usage
+  margin_critical_pct: 95           # auto square-off worst leg at 95%
+
+# ── Orders ───────────────────────────────────────────────────
+orders:
+  order_type: MARKET
+  product_type: MIS
+  slippage_buffer: 0.5
+  retry_attempts: 3
+  retry_delay_seconds: 2
+
+# ── Dashboard ────────────────────────────────────────────────
+dashboard:
+  host: "0.0.0.0"
+  port: 8050
+  refresh_interval_ms: 10000
+
+# ── Logging ──────────────────────────────────────────────────
+logging:
+  level: INFO
+  log_to_file: true
+  log_dir: logs/
+  max_bytes: 10485760
+  backup_count: 5
